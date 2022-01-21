@@ -62,9 +62,10 @@ class HazifeladatokController extends Controller
      * @param  \App\Models\hazifeladatok  $hazifeladatok
      * @return \Illuminate\Http\Response
      */
-    public function edit(hazifeladatok $hazifeladatok)
+    public function edit($id)
     {
-        //
+        $hazifeladat = hazifeladatok::find($id);
+        return view('hazifeladatok.edithazifeladat', ['hazifeladat' => $hazifeladat]);
     }
 
     /**
@@ -74,9 +75,17 @@ class HazifeladatokController extends Controller
      * @param  \App\Models\hazifeladatok  $hazifeladatok
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, hazifeladatok $hazifeladatok)
+    public function update(Request $request,  $id)
     {
-        //
+        $this->validate($request,[
+            'szoveges' => 'required',
+            'pontszam' => 'required'
+        ]);
+        $hazifeladat = hazifeladatok::find($id);
+        $hazifeladat->szoveges = $request->input("szoveges");
+        $hazifeladat->pontszam = $request->input("pontszam");
+        $hazifeladat->save();
+        return redirect()->route('hazifeladatok.index', $hazifeladat->id);
     }
 
     /**

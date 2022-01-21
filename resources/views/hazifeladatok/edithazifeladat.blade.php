@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +8,20 @@
 </head>
 <body>
 <h1>Edit Hazifeladat</h1>
-    <form method='POST' action="{{ route('hazifeladatok.update', $statue->id) }}">
-        @method('PATCH')
+    <form method='POST' action="{{ route('hazifeladatok.update', $hazifeladat->id) }}">
+        @method('PUT')
         @csrf
         <div>
-            Person:<br>
-            <input type="text" name="person" value="{{$statue->person}}">
+            URL:<br>
+            <a href="{{ $hazifeladat->url }}"><p>{{ $hazifeladat->url }}</p></a>
         </div>
         <div>
-            Height:<br>
-            <input type="number" name="height" value="{{$statue->height}}">
+            Szöveges értékelés:<br>
+            <input type="text" name="szoveges" value="{{ $hazifeladat->szoveges}}">
         </div>
         <div>
-            Price:<br>
-            <input type="number" name="price" value="{{$statue->price}}">
+            pontszám:<br>
+            <input type="number" name="pontszam" value="{{ $hazifeladat->pontszam}}">
         </div>
         <div>
             <input type="submit" value="Edit">

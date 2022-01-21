@@ -31,9 +31,9 @@
                 </form>
             </td>
             <td>
-                <form action="{{route('hazifeladatok.edit'm $hazifeladat->id)}} method='POST'">
+                <form action="{{route('hazifeladatok.edit', $hazifeladat->id)}}" method='GET'>
                     @csrf
-                    @method('POST')
+                    @method('GET')
                     <button type="submit">Értékelés</button>
                 </form>
             </td>
