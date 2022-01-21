@@ -14,7 +14,8 @@ class HazifeladatokController extends Controller
      */
     public function index()
     {
-        //
+        $hazifeladatok = hazifeladatok::orderBy('id')->get();
+        return view('hazifeladatok.hazifeladatok', ['hazifeladatok'=> $hazifeladatok]);
     }
 
     /**
@@ -24,7 +25,7 @@ class HazifeladatokController extends Controller
      */
     public function create()
     {
-        //
+        return view('hazifeladatok.createhazifeladat');
     }
 
     /**
@@ -35,7 +36,13 @@ class HazifeladatokController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $adatok = $request->only(['url']);
+        $hazifeladat = new hazifeladatok();
+        $hazifeladat->fill($adatok);
+        $hazifeladat->szoveges = "";
+        $hazifeladat->pontszam = -1;
+        $hazifeladat->save();
+        return redirect()->route('hazifeladatok.index');
     }
 
     /**
@@ -80,6 +87,7 @@ class HazifeladatokController extends Controller
      */
     public function destroy(hazifeladatok $hazifeladatok)
     {
-        //
+        $hazifeladatok->delete();
+        return redirect()->route('hazifeladatok.index');
     }
 }
